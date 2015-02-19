@@ -40,7 +40,7 @@ class Web extends Core\Connect {
 	 * @param string $start_date  - The start of the date range for which to retrieve bounces. 
 	 * @param string $end_date  - The end of the date range for which to retrieve blocks. 
 	 */
-	public function bounces_get($date = '' , $days = '' , $start_date = '' , $end_date = '') {
+	public function bounces_get($date = '', $days = '', $start_date = '', $end_date = '') {
 		$url = "bounces.get";
 		
 		$postData = array(
@@ -50,7 +50,7 @@ class Web extends Core\Connect {
 		    'end_date'  => $end_date,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData );
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
@@ -64,7 +64,7 @@ class Web extends Core\Connect {
 			'email'		=> $email,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData );
+		return $this->makeApiCall($url, $postData);
 	}
 
 	/**
@@ -74,7 +74,7 @@ class Web extends Core\Connect {
 	 * @param string $start_date  - The start of the date range for which to retrieve bounces. 
 	 * @param string $end_date  - The end of the date range for which to retrieve blocks. 
 	 */
-	public function blocks_get($date = '' , $days = '' , $start_date = '' , $end_date = '') {
+	public function blocks_get($date = '', $days = '', $start_date = '', $end_date = '') {
 		$url = "blocks.get";
 		
 		$postData = array(
@@ -84,7 +84,7 @@ class Web extends Core\Connect {
 		    'end_date'  => $end_date,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData );
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
@@ -98,7 +98,7 @@ class Web extends Core\Connect {
 			'email'	=> $email,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData );
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
@@ -107,16 +107,15 @@ class Web extends Core\Connect {
 	public function email_parse_get() {
 		$url = "parse.get";
 		
-		return $this->makeApiCall ( $url );
+		return $this->makeApiCall($url);
 	}
 
 	/**
 	 * Specify the hostname and url for parsing incoming emails.
 	 * @param string $hostname - hostname for parsing incoming mail
-	 * @param string $url - url for parsing incoming mail
-	 * @param string $spam_check - to check spam set to 1 (default is NO)
+	 * @param integer $spam_check - to check spam set to 1 (default is NO)
 	 */
-	public function email_parse_set( $hostname , $theurl , $spam_check = 0) {
+	public function email_parse_set($hostname, $theurl, $spam_check = 0) {
 		$url = "parse.set";
 		
 		$postData = array(
@@ -125,17 +124,16 @@ class Web extends Core\Connect {
 			'spam_check'=>	$spam_check,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData );
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	
 	/**
 	 * Edit existing email parse settings.
 	 * @param string $hostname - hostname for parsing incoming mail
-	 * @param string $url - url for parsing incoming mail
-	 * @param string $spam_check - to check spam set to 1 (default is NO)
+	 * @param integer $spam_check - to check spam set to 1 (default is NO)
 	 */
-	public function email_parse_edit( $hostname , $theurl , $spam_check = 0) {
+	public function email_parse_edit($hostname, $theurl, $spam_check = 0) {
 		$url = "parse.edit";
 		
 		$postData = array(
@@ -144,21 +142,21 @@ class Web extends Core\Connect {
 			'spam_check'=>	$spam_check,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData );
+		return $this->makeApiCall($url, $postData);
 	}
 
 	/**
 	 * Edit existing email parse settings.
 	 * @param string $hostname - hostname for parsing incoming mail
 	 */
-	public function email_parse_delete( $hostname ) {
+	public function email_parse_delete($hostname) {
 		$url = "parse.delete";
 		
 		$postData = array(
 			'hostname'	=>	$hostname,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData );
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
@@ -167,21 +165,21 @@ class Web extends Core\Connect {
 	public function event_posturl_get() {
 		$url = "eventposturl.get";
 		
-		return $this->makeApiCall ( $url );
+		return $this->makeApiCall($url);
 	}
 
 	/**
 	 * Update notification URL.
 	 * @param string $theurl - The URL to receive event notifications
 	 */
-	public function event_posturl_set( $theurl ) {
+	public function event_posturl_set($theurl) {
 		$url = "eventposturl.set";
 		
 		$postData = array(
 			'url'	=>	$theurl,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
@@ -190,44 +188,44 @@ class Web extends Core\Connect {
 	public function event_posturl_delete() {
 		$url = "eventposturl.delete";
 				
-		return $this->makeApiCall ( $url );
+		return $this->makeApiCall($url);
 	}
 	
 	/**
 	 * Get a list of available Apps.
 	 */
-	public function filter_get( $theurl ) {
+	public function filter_get($theurl) {
 		$url = "filter.getavailable";
 		
-		return $this->makeApiCall ( $url );
+		return $this->makeApiCall($url);
 	}
 	
 	/**
 	 * Update notification URL.
 	 * @param string $name - name of the App to activate
 	 */
-	public function filter_activate( $name ) {
+	public function filter_activate($name) {
 		$url = "filter.activate";
 		
 		$postData = array(
 			'name'	=>	$name,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
 	 * Update notification URL.
 	 * @param string $name - name of the App to deactivate
 	 */
-	public function filter_deactivate( $name ) {
+	public function filter_deactivate($name) {
 		$url = "filter.deactivate";
 		
 		$postData = array(
 			'name'	=>	$name,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
@@ -236,26 +234,26 @@ class Web extends Core\Connect {
  	 * @param array $postData - App settings (Name & data)
 	 * app settings can be found here: http://docs.sendgrid.com/documentation/api/web-api/filtersettings/
 	 */
-	public function filter_setup( $name , $postData ) {
+	public function filter_setup($name, $postData) {
 		$url = "filter.setup";
 		
 		$postData['name'] = $name;
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
 	 * get app settings.
 	 * @param string $name - name of the App to get
 	 */
-	public function filter_getsettings( $name ) {
+	public function filter_getsettings($name) {
 		$url = "filter.getsettings";
 		
 		$postData = array(
 			'name'	=>	$name,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
@@ -265,7 +263,7 @@ class Web extends Core\Connect {
 	 * @param string $start_date  - The start of the date range for which to retrieve bounces. 
 	 * @param string $end_date  - The end of the date range for which to retrieve blocks.
 	 */
-	public function invalid_emails_get( $date = '' , $days = '' , $start_date = '' , $end_date = '' ) {
+	public function invalid_emails_get($date = '', $days = '', $start_date = '', $end_date = '') {
 		$url = "invalidemails.get";
 		
 		$postData = array(
@@ -275,21 +273,21 @@ class Web extends Core\Connect {
 		    'end_date'  => $end_date,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
 	 * Delete an address from the Invalid Email list.
 	 * @param string $email - Email Invalid Email address to remove
 	 */
-	public function invalid_emails_delete( $email ) {
+	public function invalid_emails_delete($email) {
 		$url = "invalidemails.delete";
 		
 		$postData = array(
 			'email'	=> $email,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
@@ -309,7 +307,7 @@ class Web extends Core\Connect {
  	 * @param array $files - an array of file names and paths
 	 * EX: $files = array('filename1' => 'filepath' , 'filename2' => 'filepath2',)
 	*/
-	public function mail_send( $to , $toname = '' , $xsmtpapi = '' , $subject , $html , $text , $from , $bcc ='' , $fromname='' , $replyto='' , $date='' , $files='' , $headers='') {
+	public function mail_send($to, $toname = '', $xsmtpapi = '', $subject, $html, $text, $from, $bcc = '', $fromname = '', $replyto = '', $date = '', $files = '', $headers = '') {
 		$url = "mail.send";
 		
 		$postData = array(
@@ -327,13 +325,13 @@ class Web extends Core\Connect {
 			'headers'	=> $headers ? json_encode($headers) : $headers,
 		  );
 		
-		if($files){
-			foreach($files as $filename => $filepath){
-				$postData['files['.$filename.']'] = '@'.$filepath.'/'.$filename;
+		if ($files) {
+			foreach ($files as $filename => $filepath) {
+				$postData['files[' . $filename . ']'] = '@' . $filepath . '/' . $filename;
 			}
 		}
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
@@ -342,7 +340,7 @@ class Web extends Core\Connect {
 	public function profile_get() {
 		$url = "profile.get";
 		
-		return $this->makeApiCall ( $url );
+		return $this->makeApiCall($url);
 	}
 	
 	/**
@@ -357,7 +355,7 @@ class Web extends Core\Connect {
 	 * @param string $phone - Valid phone number where we can reach you
 	 * @param string $website - Your company’s website
 	 */
-	public function profile_set( $first_name ='' , $last_name ='' , $address ='' , $city ='' , $state ='' , $country ='' , $zip ='' , $phone ='' , $website ='') {
+	public function profile_set($first_name = '', $last_name = '', $address = '', $city = '', $state = '', $country = '', $zip = '', $phone = '', $website = '') {
 		$url = "profile.set";
 		
 		$postData = array(
@@ -372,21 +370,21 @@ class Web extends Core\Connect {
 			'website'	=> $website,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
 	 * This is the new username we will be authenticating with our SMTP servers and our website. Changes take effect immediately
 	 * @param string $username - Your first name
 	 */
-	public function profile_setUsername( $username ) {
+	public function profile_setUsername($username) {
 		$url = "profile.setUsername";
 		
 		$postData = array(
 			'username'=> $username,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
@@ -394,7 +392,7 @@ class Web extends Core\Connect {
 	 * @param string $password - Your new password
  	 * @param string $confirm_password - Confirm new password
 	 */
-	public function profile_setPassword( $password , $confirm_password) {
+	public function profile_setPassword($password, $confirm_password) {
 		$url = "profile.setPassword";
 		
 		$postData = array(
@@ -402,21 +400,21 @@ class Web extends Core\Connect {
 			'confirm_password'	=> $confirm_password,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
 	 * Update contact email address.
 	 * @param string $email - This is the new email address we will be contacting you with. Changes take effect immediately
 	 */
-	public function profile_setEmail( $email) {
+	public function profile_setEmail($email) {
 		$url = "profile.setEmail";
 		
 		$postData = array(
 			'email'	=> $email,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
@@ -426,7 +424,7 @@ class Web extends Core\Connect {
 	 * @param string $start_date  - The start of the date range for which to retrieve bounces. 
 	 * @param string $end_date  - The end of the date range for which to retrieve blocks.
 	 */
-	public function spamreports_get( $date = '' , $days = '' , $start_date = '' , $end_date = '') {
+	public function spamreports_get($date = '', $days = '', $start_date = '', $end_date = '') {
 		$url = "spamreports.get";
 		
 		$postData = array(
@@ -436,21 +434,21 @@ class Web extends Core\Connect {
 		    'end_date'  => $end_date,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
 	 * Remove an email address from your spam report list.
 	 * @param string $email - Retrieve the timestamp of the bounce records. It will return a date in a MySQL timestamp format – YYYY-MM-DD HH:MM:SS 
 	 */
-	public function spamreports_delete(  $email ) {
+	public function spamreports_delete($email) {
 		$url = "spamreports.delete";
 		
 		$postData = array(
 			'email'		=> $email,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
@@ -459,7 +457,7 @@ class Web extends Core\Connect {
 	 * @param string $start_date  - The start of the date range for which to retrieve bounces. 
 	 * @param string $end_date  - The end of the date range for which to retrieve blocks.
 	 */
-	public function stats_get( $days = '' , $start_date = '' , $end_date = '') {
+	public function stats_get($days = '', $start_date = '', $end_date = '') {
 		$url = "stats.get";
 		
 		$postData = array(
@@ -468,21 +466,21 @@ class Web extends Core\Connect {
 		    'end_date'  => $end_date,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
 	 * Add an email to your unsubscribe list.
  	 * @param string $email - Email address to add to unsubscribe list
 	 */
-	public function unsubscribes_add( $email ) {
+	public function unsubscribes_add($email) {
 		$url = "unsubscribes.add";
 		
 		$postData = array(
 			'email'		=> $email,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
@@ -492,7 +490,7 @@ class Web extends Core\Connect {
 	 * @param string $start_date  - The start of the date range for which to retrieve bounces. 
 	 * @param string $end_date  - The end of the date range for which to retrieve blocks.
 	 */
-	public function unsubscribes_get( $date = '' , $days = '' , $start_date = '' , $end_date = '' ) {
+	public function unsubscribes_get($date = '', $days = '', $start_date = '', $end_date = '') {
 		$url = "unsubscribes.get";
 		
 		$postData = array(
@@ -502,21 +500,21 @@ class Web extends Core\Connect {
 		    'end_date'  => $end_date,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 	
 	/**
 	 * Delete an address from the Unsubscribe list.
  	 * @param string $email - Unsubscribed email address to remove
 	 */
-	public function unsubscribes_delete( $email ) {
+	public function unsubscribes_delete($email) {
 		$url = "unsubscribes.delete";
 		
 		$postData = array(
 			'email'		=> $email,
 		  );
 		
-		return $this->makeApiCall ( $url , $postData);
+		return $this->makeApiCall($url, $postData);
 	}
 }
 ?>
