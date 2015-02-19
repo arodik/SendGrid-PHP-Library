@@ -1,0 +1,15 @@
+{
+    "name": "arodik/sendgrid-newsletter-api",
+    "description": "PHP library for using Sendgrid Newsletter API",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Alexandr Rodik",
+            "email": "rodik@readdle.com"
+        }
+    ],
+    "require": {},
+    "autoload" : {
+      "psr-4" : { "Sendgrid\\" : "src/Sendgrid" }
+    }
+}

@@ -1,6 +1,5 @@
-
-sendgrid/core/.DS_Store
-
-sendgrid/.DS_Store
-
-.DS_Store
+/.idea
+/src/core/.DS_Store
+/src/.DS_Store
+/.DS_Store
+/vendor/

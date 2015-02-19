@@ -1,4 +1,7 @@
 <?php
+
+namespace Sendgrid;
+
 /**
  * SendGrid Web PHP API ...
  * extends sendgridConnect
@@ -28,9 +31,7 @@
  * 
 */
 
-require_once "core/sendgrid-connect.php";
-
-class sendgridWeb extends sendgridConnect {
+class Web extends Core\Connect {
 
 	/**
 	 * Retrieve a list of bounces with addresses and response codes, optionally with dates.
