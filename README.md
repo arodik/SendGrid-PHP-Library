@@ -6,7 +6,7 @@
 ```php
 {
     "require": {
-        "league/plates": "3.*"
+        "arodik/sendgrid-newsletter-api": "dev-master"
     }
 }
 ```
