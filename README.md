@@ -6,7 +6,7 @@
 ```php
 {
     "require": {
-        "arodik/sendgrid-newsletter-api": "dev-master"
+        "arodik/sendgrid-newsletter-api": "~1.0"
     }
 }
 ```
