@@ -35,7 +35,7 @@ class Connect
      * sendgrid endpoint ...
      * @var string
      */
-    const SG_ENDPOINT = 'https://sendgrid.com/api';
+    const SG_ENDPOINT = 'https://api.sendgrid.com/api';
 
     /**
      * Creates a new SendGrid Newsletter API object to make calls with
