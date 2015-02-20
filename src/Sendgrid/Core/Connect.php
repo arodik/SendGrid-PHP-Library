@@ -3,43 +3,19 @@
 namespace Sendgrid\Core;
 
 /**
- * SendGrid Newsletter PHP API ...
- *
- * Copyright (C) 2011  Alon Ben David
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
- *
- *
- * @author Alon Ben David - CoolGeex.com
- *
  * All the methods returns an array of data or one string / int
  * If false returned you can run getLastResponseError() to see the error information
  * If error information == NULL then no error accrued (like deleting a record returns 0 records deleted if no record found)
- *
- * CHECK sample.php for list of methods, variables and code samples
- *
  */
 
 class Connect
 {
-
     private $apiEndpoint;
     private $authUser;
     private $authKey;
     private $lastResponseError;
-    private $_debug;
-    private $_curl_ssl_verify;
+    private $debug;
+    private $curlSSLVerify;
 
     /**
      * Timeout in seconds for an API call to respond
@@ -71,37 +47,42 @@ class Connect
      * @param string $user The username of the account to use
      * @param string $key The API key to use
      * @param boolean $debug Set to true to get debug information (development)
-     * $param boolean $curl_ssl_verify set false to disable CURL ssl cert verification
+     * @param boolean $curlSSLVerify set false to disable CURL ssl cert verification
      */
-    public function __construct($user, $key, $debug = false, $curl_ssl_verify = true)
+    public function __construct($user, $key, $debug = false, $curlSSLVerify = true)
     {
         $this->authUser = $user;
         $this->authKey = $key;
         $this->apiEndpoint = self::SG_ENDPOINT;
-        $this->_debug = $debug;
-        $this->_curl_ssl_verify = $curl_ssl_verify;
+        $this->debug = $debug;
+        $this->curlSSLVerify = $curlSSLVerify;
     }
 
+    /**
+     * For clients with custom API endpoint
+     * @param $endpoint
+     */
+    public function setCustomApiEndpoint($endpoint)
+    {
+        $this->apiEndpoint = $endpoint;
+    }
 
     /**
      * Makes a call to an API
      *
      * @param string $url The relative URL to call (example: "/server")
-     * @param string $postData (Optional) The JSON string to send
+     * @param string|array $postData (Optional) The JSON string to send
      * @param string $method (Optional) The HTTP method to use
      * @return array The parsed response, or NULL if there was an error
      */
     protected function makeApiCall($url, $postData = null, $method = 'POST')
     {
-
-        //if(!$postData)return false;
-
         $postData['api_user'] = $this->authUser;
         $postData['api_key'] = $this->authKey;
 
         $this->debugCall('DEBUG - Post Data: ', $postData);
 
-        $url .= ".json";
+        $url .= '.json';
 
         $jsonUrl = $this->apiEndpoint . '/' . $url;
         // Generate curl request
@@ -110,14 +91,22 @@ class Connect
         $this->debugCall('DEBUG - Curl Session: ', $session);
 
         //Set to FALSE to stop cURL from verifying the peer's certificate (needed for local hosts development mostly)
-        if (!$this->_curl_ssl_verify) {
+        if (!$this->curlSSLVerify) {
             curl_setopt($session, CURLOPT_SSL_VERIFYPEER, false);
         }
 
         // Tell curl to use HTTP POST
         curl_setopt($session, CURLOPT_CUSTOMREQUEST, strtoupper($method));
         // Tell curl that this is the body of the POST
-        curl_setopt($session, CURLOPT_POSTFIELDS, $postData);
+        $postfields = $postData;
+        if (is_array($postData)) {
+            $postfields = http_build_query($postData);
+            // Sendgrid don't understand arrays with indexes, (lists/email/add with many recipients for example)
+            // remove them.
+            // Shame on you, Sendgrid
+            $postfields = preg_replace('/%5B[0-9]+%5D/simU', '%5B%5D', $postfields);
+        }
+        curl_setopt($session, CURLOPT_POSTFIELDS, $postfields);
         // Tell curl not to return headers, but do return the response
         curl_setopt($session, CURLOPT_HEADER, false);
         curl_setopt($session, CURLOPT_USERAGENT, self::USER_AGENT);
@@ -149,20 +138,20 @@ class Connect
      */
     private function debugCall($text = 'DEBUG : ', $data)
     {
-        if (!$this->_debug) {
+        if (!$this->debug) {
             return;
         }
 
-        $newLine = isset($_SERVER['HTTP_USER_AGENT']) ? "<br/>" : "\n";
+        $newLine = array_key_exists('HTTP_USER_AGENT', $_SERVER) ? '<br/>' : "\n";
 
         echo $newLine . $text;
         //print_r($data);
         if (is_array($data)) {
             foreach ($data as $name => $value) {
-                if ($name == 'api_user' || $name == 'api_key') {
+                if ($name === 'api_user' || $name === 'api_key') {
                     continue;
                 }
-                echo $newLine . $name . ' => ' . $value;
+                echo $newLine . $name . ' => ' . is_array($value) ? json_encode($value) : $value;
             }
             echo $newLine;
         } else {
