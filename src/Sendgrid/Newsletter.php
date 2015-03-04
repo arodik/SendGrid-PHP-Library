@@ -198,6 +198,7 @@ class Newsletter extends Core\Connect
         );
 
         $results = $this->makeApiCall($url, $postData);
+        $results = $results ?: array();
 
         return array_key_exists('inserted', $results) ? $results['inserted'] : false;
     }
@@ -220,6 +221,7 @@ class Newsletter extends Core\Connect
         );
 
         $results = $this->makeApiCall($url, $postData);
+        $results = $results ?: array();
 
         return array_key_exists('inserted', $results) ? $results['inserted'] : false;
     }
