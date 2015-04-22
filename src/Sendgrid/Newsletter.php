@@ -248,7 +248,7 @@ class Newsletter extends Core\Connect
             return false;
         } // if the current contact not exist nothing to edit
 
-        $this->newsletter_lists_email_delete($list, $email); // deleteing the current contact
+        $this->deleteEmailFromRecipientList($list, $email); // deleteing the current contact
 
         if (!$this->addEmailToRecipientList($list, $data)) { // adding the new contact information
             $this->addEmailToRecipientList($list, $originalContact[0]); // if failes reEntering the old contact back
